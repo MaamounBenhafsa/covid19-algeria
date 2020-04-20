@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dz 48 Willaya Covid Statics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+      #map{
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+<section class="hero is-dark is-fullheight">
+  <div class="hero-head">
+      <div class="container">
+        <h1 class="title" style="text-align: center; font-size: 50px;">
+          <span class="tag is-danger ">Covid 19 </span>Algeria Map<br>
+          Please Stay At Home 
+        </h1>
+      </div>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered" id="map">
+    </div>
+  </div>
+  <div class="hero-foot has-text-centered">
+      <p class="subtitle">
+      #Stay_At_Home<br>
+      <a href="https://maamounbenhafsa.github.io/Me/" class="tag is-success">By Mamoun Benhafsa</a><br>
+        donate me :
+    </p>                                        
+  </div>
+</section>
+    <script>
+      function getJSONMarkers() {
+    const markers =[
+{"name":"Adrar","deaths":"0","recovred":"0","confirmed":"0","lat":"26.418131","lang":"-0.6014717"},
+{"name":"Chlef","deaths":"1","recovred":"0","confirmed":"45","lat":"36.1663","lang":"1.33355"},
+{"name":"Laghouat","deaths":"0","recovred":"0","confirmed":"0","lat":"33.8","lang":"2.883333"},
+{"name":"Oum El Bouaghi","deaths":"04","recovred":"01","confirmed":"23","lat":"35.8775","lang":"7.11361"},
+{"name":"Batna","deaths":"0","recovred":"0","confirmed":"0","lat":"35.55","lang":"6.1666667"},
+{"name":"Béjaïa","deaths":"13","recovred":"1","confirmed":"97","lat":"36.189","lang":"5.41442"},
+{"name":"Biskra","deaths":"4","recovred":"2","confirmed":"14","lat":"35.7333","lang":"0.55"},
+{"name":"Béchar","deaths":"0","recovred":"0","confirmed":"10","lat":"31.6082","lang":"-2.22001"},
+{"name":"Blida","deaths":"96","recovred":"133","confirmed":"669","lat":"36.4805","lang":"2.8339"},
+{"name":"Bouira","deaths":"0","recovred":"0","confirmed":"0","lat":"36.37763","lang":"3.8962348"},
+{"name":"Tamanrasset","deaths":"0","recovred":"0","confirmed":"1","lat":"24.0983","lang":"3.74351"},
+{"name":"Tébessa","deaths":"2","recovred":"0","confirmed":"10","lat":"35.4071","lang":"8.12086"},
+{"name":"Tlemcen","deaths":"6","recovred":"0","confirmed":"38","lat":"34.8828","lang":"-1.31667"},
+{"name":"Tiaret","deaths":"0","recovred":"0","confirmed":"0","lat":"35.37849","lang":"1.32569"},
+{"name":"Tizi Ouzou","deaths":"10","recovred":"2","confirmed":"91","lat":"36.7167","lang":"4.05"},
+{"name":"Alger","deaths":"96","recovred":"261","confirmed":"445","lat":"36.7762","lang":"3.05837"},
+{"name":"Djelfa","deaths":"0","recovred":"0","confirmed":"0","lat":"34.6666667","lang":"3.25"},
+{"name":"Jijel","deaths":"4","recovred":"0","confirmed":"30","lat":"36.8","lang":"5.7666667"},
+{"name":"Sétif","deaths":"9","recovred":"2","confirmed":"111","lat":"36.18898","lang":"5.414416"},
+{"name":"Saïda","deaths":"0","recovred":"0","confirmed":"1","lat":"34.8333","lang":"0.15"},
+{"name":"Skikda","deaths":"0","recovred":"0","confirmed":"0","lat":"36.8666667","lang":"6.9"},
+{"name":"Sidi Bel Abbès","deaths":"0","recovred":"0","confirmed":"0","lat":"35.2022249","lang":"-0.6298922"},
+{"name":"Annaba","deaths":"0","recovred":"0","confirmed":"0","lat":"36.902859","lang":"7.755543"},
+{"name":"Guelma","deaths":"0","recovred":"0","confirmed":"9","lat":"36.4659","lang":"7.42836"},
+{"name":"Constantine","deaths":"9","recovred":"0","confirmed":"57","lat":"36.35","lang":"6.6"},
+{"name":"Médéa","deaths":"0","recovred":"0","confirmed":"0","lat":"36.2666667","lang":"2.75"},
+{"name":"Mostaganem","deaths":"3","recovred":"0","confirmed":"46","lat":"35.9398","lang":"0.089767"},
+{"name":"M'Sila","deaths":"0","recovred":"0","confirmed":"0","lat":"35.70018","lang":"4.545026"},
+{"name":"Mascara","deaths":"0","recovred":"0","confirmed":"0","lat":"35.400169","lang":"0.139852"},
+{"name":"Ouargla","deaths":"0","recovred":"0","confirmed":"0","lat":"31.96298","lang":"5.342011"},
+{"name":"Oran","deaths":"12","recovred":"0","confirmed":"153","lat":"36.189","lang":"5.41442"},
+{"name":"El Bayadh","deaths":"0","recovred":"0","confirmed":"1","lat":"33.6803","lang":"1.02028"},
+{"name":"Illizi","deaths":"0","recovred":"0","confirmed":"2","lat":"26.505","lang":"8.48222"},
+{"name":"Bordj Bou Arreridj","deaths":"12","recovred":"0","confirmed":"60","lat":"36.0712","lang":"4.7588"},
+{"name":"Boumerdès","deaths":"0","recovred":"0","confirmed":"0","lat":"36.7675962","lang":"3.7029002"},
+{"name":"El Tarf","deaths":"0","recovred":"0","confirmed":"6","lat":"36.7559","lang":"8.2213"},
+{"name":"Tindouf","deaths":"0","recovred":"0","confirmed":"0","lat":"27.6761012","lang":"-8.1276526"},
+{"name":"Tissemsilt","deaths":"0","recovred":"0","confirmed":"0","lat":"35.607778","lang":"1.811111"},
+{"name":"El Oued","deaths":"0","recovred":"0","confirmed":"0","lat":"33.368309","lang":"6.867369"},
+{"name":"Khenchela","deaths":"0","recovred":"0","confirmed":"0","lat":"35.416667","lang":"7.133333"},
+{"name":"Souk Ahras","deaths":"1","recovred":"0","confirmed":"7","lat":"36.2864","lang":"7.95111"},
+{"name":"Tipaza","deaths":"17","recovred":"0","confirmed":"90","lat":"36.6179","lang":"2.39124"},
+{"name":"Mila","deaths":"1","recovred":"0","confirmed":"7","lat":"36.45","lang":"6.25"},
+{"name":"Aïn Defla","deaths":"5","recovred":"0","confirmed":"83","lat":"36.2667","lang":"1.96667"},
+{"name":"Naâma","deaths":"0","recovred":"0","confirmed":"1","lat":"33.4351","lang":"-0.905662"},
+{"name":"Aïn Témouchent","deaths":"0","recovred":"0","confirmed":"0","lat":"35.30241","lang":"-1.14489"},
+{"name":"Ghardaïa","deaths":"0","recovred":"0","confirmed":"0","lat":"32.489059","lang":"3.678539"},
+{"name":"Relizane","deaths":"2","recovred":"0","confirmed":"12","lat":"35.7333","lang":"0.55"}
+  ];
+          return markers;
+        }
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 36.776214, lng: 3.058375 },
+          disableDefaultUI: true,
+          zoom: 6,
+          styles: [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#242f3e"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#746855"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#242f3e"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#d59563"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#d59563"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#263c3f"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#6b9a76"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#38414e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#212a37"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9ca5b3"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#746855"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#1f2835"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#f3d19c"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#2f3948"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#d59563"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#17263c"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#515c6d"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#17263c"
+      }
+    ]
+  }
+]
+        });
+        const static = getJSONMarkers();
+       for(stat of static) {
+          let marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(stat.lat, stat.lang),
+            title: stat.name,
+            content: stat.deaths,
+            icon: 'virus.png'
+            })
+           let infowindow = new google.maps.InfoWindow({
+              content: '<span class="tag is-info">'+stat.name+'</span><br>'+'<span class="tag is-danger">deaths='+stat.deaths+'</span><br>'+'<span class="tag is-warning">confirmed='+stat.confirmed+'</span><br>'+'<span class="tag is-success">recovred='+stat.recovred+'</span>'
+
+              });
+
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            });
+          }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwmkgwnnu6l2ypPZdNVfYFtxSeEwNu9bg&callback=initMap"
+    async defer></script>
+  </body>
+</html>
